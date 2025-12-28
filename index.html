@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+<meta charset="UTF-8">
+<title>تولدت مبارک ماهلین عزیزم</title>
+<style>
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  color: #fff;
+  text-align: center;
+}
+.container {
+  padding: 60px 20px;
+}
+h1 {
+  font-size: 2.6rem;
+}
+p {
+  font-size: 1.2rem;
+  line-height: 2;
+  margin-top: 30px;
+}
+button {
+  margin-top: 40px;
+  padding: 15px 35px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 40px;
+  background: #fff;
+  color: #ff4f7a;
+  cursor: pointer;
+  transition: 0.3s;
+}
+button:hover { transform: scale(1.08); }
+#surprise {
+  display: none;
+  margin-top: 40px;
+  font-size: 1.3rem;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>🎂 تولدت مبارک ماهلین عزیزم 🎂</h1>
+
+  <p>
+    ماهلین عزیزم،  
+    امروز فقط تولد تو نیست،  
+    روزیه که دنیای من  
+    یکی از قشنگ‌ترین دلیل‌هاشو پیدا کرد.  
+    خوشحالم که توی زندگی منی ❤️
+  </p>
+<button onclick="startSurprise()">شروع سوپرایز 🎉</button>
+<button onclick="playVoice()">یه حرف از ته دل 💖</button>
+
+  <div id="surprise">
+    این صدا،  
+    از دلیه که  
+    همیشه با توئه 💖
+  </div>
+</div>
+
+<!-- موسیقی پس‌زمینه -->
+<audio id="bgMusic" loop>
+  <source src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Yiruma/River_Flows_In_You/Yiruma_-_River_Flows_In_You.mp3" type="audio/mpeg">
+</audio>
+
+<!-- پیام صوتی تو -->
+<audio id="voiceMessage">
+  <source src="mahlin.m4a" type="audio/mp4">
+</audio>
+
+<script>
+function fadeVolume(audio, target, duration=800) {
+  const step = (target - audio.volume) / (duration / 50);
+  const interval = setInterval(() => {
+    audio.volume = Math.max(0, Math.min(1, audio.volume + step));
+    if ((step > 0 && audio.volume >= target) || (step < 0 && audio.volume <= target)) {
+      audio.volume = target;
+      clearInterval(interval);
+    }
+  }, 50);
+}
+
+function startSurprise() {
+  const music = document.getElementById("bgMusic");
+  const voice = document.getElementById("voiceMessage");
+
+  document.getElementById("surprise").style.display = "block";
+
+  music.volume = 0.35;
+  music.play();
+
+  // بعد از 2 ثانیه، صدای تو شروع میشه و موزیک میاد پایین
+  setTimeout(() => {
+    fadeVolume(music, 0.15, 600);
+    voice.play();
+  }, 2000);
+
+  // وقتی صدات تموم شد، موزیک برمی‌گرده بالا
+  voice.onended = () => {
+    fadeVolume(music, 0.4, 1200);
+  };
+}
+</script>
+<script src="script.js"></script>
+<audio id="bgMusic" src="music.mp3" loop></audio>
+<audio id="voice" src="mahlin.m4a"></audio>
+
+<script>
+function startSurprise() {
+  document.getElementById("bgm").play();
+}
+
+function playVoice() {
+  document.getElementById("voice").play();
+}
+</script>
+</body>
+</html>
